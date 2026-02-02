@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bye Meet | Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <h1>Bye Meet</h1>
+    <p>Meeting Management</p>
+</div>
+
+<!-- Dashboard Content -->
+<div class="dashboard">
+
+    <!-- Calendar -->
+    <div class="calendar-card">
+    <div class="calendar-header">
+        <button id="prevMonth">⬅</button>
+        <h2 id="monthYear"></h2>
+        <button id="nextMonth">➡</button>
+    </div>
+
+  
+
+    <div class="weekdays">
+        <span>Sun</span><span>Mon</span><span>Tue</span>
+        <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+    </div>
+
+    <!-- THIS IS VERY IMPORTANT -->
+    <div id="calendar" class="calendar-grid"></div>
+</div>
+
+
+    <!-- Meetings -->
+    <div class="meeting-section">
+    <h3>Today's Meetings</h3>
+    <div id="today"></div>
+</div>
+
+<div class="meeting-section">
+    <h3>Upcoming Meetings</h3>
+    <div id="upcoming"></div>
+</div>
+
+<div class="meeting-section">
+    <h3>Past Meetings</h3>
+    <div id="past"></div>
+</div>
+
+
+</div>
+
+<div class="bottom-nav">
+    <a href="dashboard.html" class="nav-item">📆<br>Schedule</a>
+    <a href="meetings.html" class="nav-item">🗂<br>Meetings</a>
+    <a href="summarization.html" class="nav-item active">🔔<br>Alerts</a>
+    <a href="account.html" class="nav-item">⚙<br>Account</a>
+</div>
+
+
+<script src="dashboard.js"></script>
+</body>
+</html>
