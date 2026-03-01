@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Present Meetings</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./meetings.css">
+</head>
+<body>
+
+<div class="header">
+    <button onclick="goBack()">← Back</button>
+    <h2>Present Meetings</h2>
+</div>
+
+<div class="container">
+    <div id="meetingList"></div>
+</div>
+
+<button onclick="viewSummary(meeting.id)">View Summary</button>
+
+
+<!-- JS -->
+<script src="./meetings.js"></script>
+<script>
+    renderMeetings("present");
+</script>
+
+</body>
+</html>

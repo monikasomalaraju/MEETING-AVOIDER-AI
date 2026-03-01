@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bye Meet | Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link
+       rel="stylesheet"
+       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- PROFILE POPUP -->
+<div id="profileOverlay" class="overlay" onclick="closeProfilePopup()">
+    <div class="profile-popup" onclick="event.stopPropagation()">
+
+        <div class="profile-header">
+            <i class="fa-solid fa-user-circle"></i>
+            <h3 id="profileName">User</h3>
+            <p id="profileRole">Role</p>
+        </div>
+
+        <div class="profile-options">
+            <button>My Profile</button>
+            <button>Settings</button>
+            <button class="logout" onclick="logout()">Logout</button>
+        </div>
+
+    </div>
+</div>
+
+</head>
+<!-- Top Bar -->
+<div class="topbar">
+    <div class="title">
+        <h2>Bye Meet</h2>
+        <span>Meeting Management</span>
+    </div>
+
+    <div class="profile-btn" onclick="toggleSidebar()">
+        <i class="fa-solid fa-user"></i>
+    </div>
+</div>
+
+<!-- Profile Sidebar -->
+<div id="profileSidebar" class="profile-sidebar">
+    <div class="profile-header">
+        <div class="profile-icon">
+            <i class="fa-solid fa-user"></i>
+        </div>
+        <h3 id="profileName">User</h3>
+    </div>
+
+    <a href="profile.html">👤 View Profile</a>
+    <a href="settings.html">⚙ Settings</a>
+    <a href="help.html">❓ Help</a>
+    <a onclick="logout()" class="logout">🚪 Logout</a>
+</div>
+
+<body onload="protectPage()">
+    <!-- Meeting Reminder Popup -->
+<div id="meetingPopup" class="meeting-popup">
+    <div class="popup-card">
+        <h3 id="popupTitle">Meeting Reminder</h3>
+        <p id="popupTime"></p>
+
+        <div class="popup-actions">
+            <button id="joinMeetingBtn">Join</button>
+            <button onclick="closeMeetingPopup()">Later</button>
+        </div>
+    </div>
+</div>
+
+
+    <div id="joinPopup" class="join-popup" style="display:none;">
+    <h3 id="popupTitle"></h3>
+    <p>Meeting is starting now</p>
+    <button id="joinBtn">Join Meeting</button>
+    <button onclick="closePopup()">Close</button>
+</div>
+
+
+
+<div class="dashboard">
+
+    <!-- Calendar -->
+    <div class="calendar-card">
+        <div class="calendar-header">
+            <button id="prevMonth">⬅</button>
+            <h2 id="monthYear"></h2>
+            <button id="nextMonth">➡</button>
+        </div>
+
+        <div class="weekdays">
+            <span>Sun</span><span>Mon</span><span>Tue</span>
+            <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+
+        <div id="calendar" class="calendar-grid"></div>
+    </div>
+
+  <div class="meeting-section">
+    
+    
+    <h3>
+        Today's Meetings 
+        <span id="todayBadge" class="badge" style="display:none;">!</span>
+    </h3>
+
+    <div id="todayNotification" class="today-notification" style="display:none;">
+        📢 You have meetings scheduled today!
+    </div>
+
+    <div id="today"></div>
+
+</div>
+
+
+
+<div class="meeting-section" id="future" style="display:none;">
+    <h3>Future Meetings</h3>
+    <div id="upcoming"></div>
+</div>
+
+<div class="meeting-section" id="past" style="display:none;">
+    <h3>Past Meetings</h3>
+    <div id="past"></div>
+</div>
+
+<div class="meeting-section" id="summary" style="display:none;">
+    <h3>Meeting Summary</h3>
+    <p style="color:#555;">
+        Click a meeting to view or generate summary.
+    </p>
+</div>
+
+<nav class="navbar">
+
+    <a href="present-meetings.html" class="nav-item">
+        <i class="fa-solid fa-clock"></i>
+        <span>Present</span>
+    </a>
+
+    <a href="past-meetings.html" class="nav-item">
+        <i class="fa-solid fa-backward"></i>
+        <span>Past</span>
+    </a>
+
+    <a href="future-meetings.html" class="nav-item">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span>Future</span>
+    </a>
+
+    <a href="summary.html" class="nav-item">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Summary</span>
+    </a>
+</nav>
+
+<button onclick="document.getElementById('fileInput').click()">
+    Add Meeting
+</button>
+
+<input type="file" id="fileInput" accept="video/mp4" style="display:none" onchange="uploadFile()">
+
+</div>
+
+<!-- Scripts -->
+<script src="../script.js"></script>
+<script src="dashboard.js"></script>
+
+</body>
+</html>

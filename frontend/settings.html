@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bye Meet | Settings</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f8;
+            padding: 20px;
+        }
+        .settings {
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 10px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background: #3b5f8a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="settings">
+    <h2>Settings</h2>
+
+    <h2 style="text-align:center;">⚙ Settings</h2>
+<p style="text-align:center;">Coming soon...</p>
+ 
+    <label>
+        <input type="checkbox"> Enable Notifications
+    </label>
+
+    <label>
+        <input type="checkbox"> Dark Mode
+    </label>
+
+    <button onclick="saveSettings()">Save Settings</button>
+</div>
+
+<script>
+function saveSettings() {
+    alert("Settings saved successfully ✅");
+}
+</script>
+
+</body>
+</html>

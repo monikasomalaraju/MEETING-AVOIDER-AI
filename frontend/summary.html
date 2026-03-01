@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Meeting Summary</title>
+
+<style>
+body { font-family: Arial; margin: 50px; }
+h2 { color: #2c3e50; }
+</style>
+
+</head>
+<body>
+
+<h2>Meeting Summary</h2>
+
+<p id="fileName"></p>
+
+
+
+<input type="file" id="fileInput" accept="video/mp4" onchange="saveMeeting()">
+<script>
+function saveMeeting() {
+    let file = document.getElementById("fileInput").files[0];
+
+    if (file) {
+
+        let meetings = JSON.parse(localStorage.getItem("presentMeetings")) || [];
+
+        meetings.push({
+            name: file.name,
+            summary: "Project timeline discussed. Budget updates provided."
+        });
+
+        localStorage.setItem("presentMeetings", JSON.stringify(meetings));
+
+        window.location.href = "present-meetings.html";
+    }
+}
+</script>
+
+</body>
+</html>

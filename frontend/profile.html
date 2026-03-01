@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile | Bye Meet</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<div class="profile-container">
+
+    <h2>👤 My Profile</h2>
+
+    <div class="profile-card">
+        <img id="profileImage" src="images/default-profile.png" alt="Profile">
+
+        <label class="upload-btn">
+            <i class="fa-solid fa-camera"></i> Change Photo
+            <input type="file" accept="image/*" onchange="uploadImage(event)">
+        </label>
+    </div>
+
+</div>
+
+<script src="profile.js"></script>
+</body>
+</html>

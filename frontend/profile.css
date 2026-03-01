@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6fb;
+}
+
+.profile-container {
+    padding: 30px;
+    text-align: center;
+}
+
+.profile-card {
+    background: white;
+    width: 280px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.profile-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #4a6cf7;
+}
+
+.upload-btn {
+    display: inline-block;
+    padding: 10px 16px;
+    background: #4a6cf7;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.upload-btn input {
+    display: none;
+}

@@ -8,32 +8,29 @@
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- Illustration -->
-        <img src="images/login.png" alt="Login" class="illustration">
+    <img src="images/login.png" class="illustration">
 
-        <!-- App Name -->
-        <h1>Bye Meet</h1>
-        <p class="tagline">Save time. Skip stress.</p>
+    <h1>Bye Meet</h1>
+    <p class="tagline">Save time. Skip stress.</p>
 
-        <!-- Login Form -->
-        <input type="email" placeholder="Email" required>
-        <input type="password" placeholder="Password" required>
-        <a href="login.html/dashboard.html">
-           <button onclick="goToPage('dashboard.html')">Login</button>
-        </a>        
+    <!-- LOGIN FORM -->
+    <form onsubmit="login(); return false;">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
 
-        <!-- Links -->
-        <div class="links">
-            <a href="signup.html">Create Account</a>
-            <a href="forgot.html">Forgot Password?</a>
-        </div>
+        <!-- IMPORTANT: type="submit", no onclick -->
+        <button type="submit">Login</button>
+    </form>
 
-    
-
+    <div class="links">
+        <a href="signup.html">Create Account</a>
+        <a href="forgot.html">Forgot Password?</a>
     </div>
 
-    <script src="script.js"></script>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
