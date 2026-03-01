@@ -1,52 +1,67 @@
+const API_URL = "http://localhost:8000";
+
 // SIGNUP
-function signup() {
+async function signup() {
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim().toLowerCase();
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
-
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-
-    if (users.find(u => u.email === email)) {
-        alert("User already exists. Please login.");
-        return;
-    }
 
     if (password !== confirmPassword) {
         alert("Passwords do not match");
         return;
     }
 
-    users.push({ name, email, password });
-    localStorage.setItem("users", JSON.stringify(users));
+    try {
+        const response = await fetch(`${API_URL}/auth/signup`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, password })
+        });
 
-    alert("Signup successful!");
-    window.location.href = "login.html";
+        if (!response.ok) {
+            const error = await response.json();
+            alert(error.detail || "Signup failed");
+            return;
+        }
+
+        const user = await response.json();
+        localStorage.setItem("currentUser", JSON.stringify(user));
+        alert("Signup successful!");
+        window.location.href = "login.html";
+    } catch (error) {
+        alert("Error: " + error.message);
+    }
 }
 
 // LOGIN
-function login() {
+async function login() {
     const email = document.getElementById("email").value.trim().toLowerCase();
     const password = document.getElementById("password").value;
 
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    try {
+        const response = await fetch(`${API_URL}/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
 
-    const user = users.find(
-        u => u.email === email && u.password === password
-    );
+        if (!response.ok) {
+            alert("Incorrect email or password");
+            return;
+        }
 
-    if (!user) {
-        alert("Incorrect email or password");
-        return;
+        const data = await response.json();
+        localStorage.setItem("currentUser", JSON.stringify(data.user));
+        window.location.href = "dashboard.html";
+    } catch (error) {
+        alert("Error: " + error.message);
     }
-
-    localStorage.setItem("loggedInUser", email);
-    window.location.href = "dashboard.html";
 }
 
 // DASHBOARD PROTECTION
 function protectPage() {
-    const user = localStorage.getItem("loggedInUser");
+    const user = localStorage.getItem("currentUser");
     if (!user) {
         alert("Please login first");
         window.location.href = "login.html";
@@ -55,7 +70,7 @@ function protectPage() {
 
 // LOGOUT
 function logout() {
-    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("currentUser");
     window.location.href = "login.html";
 }
 

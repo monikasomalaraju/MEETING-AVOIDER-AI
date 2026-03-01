@@ -24,7 +24,11 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
     hashed = pwd_context.hash(user.password)
-    db_user = User(email=user.email, hashed_password=hashed)
+    db_user = User(
+        name=user.name,
+        email=user.email,
+        hashed_password=hashed
+    )
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -36,4 +40,7 @@ def login(user: UserCreate, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.email == user.email).first()
     if not db_user or not pwd_context.verify(user.password, db_user.hashed_password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
-    return {"message": "login successful", "user": {"id": db_user.id, "email": db_user.email}}
+    return {
+        "message": "login successful",
+        "user": {"id": db_user.id, "name": db_user.name, "email": db_user.email}
+    }

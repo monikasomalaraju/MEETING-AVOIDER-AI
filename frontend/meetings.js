@@ -1,6 +1,24 @@
-const meetings = JSON.parse(localStorage.getItem("meetings")) || [];
+const API_URL = "http://localhost:8000";
+let meetings = [];
 const list = document.getElementById("meetingList");
 const today = new Date().toISOString().split("T")[0];
+
+async function loadMeetings() {
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+    if (!user) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/meetings/${user.id}`);
+        if (response.ok) {
+            meetings = await response.json();
+        }
+    } catch (error) {
+        console.error("Error loading meetings:", error);
+    }
+}
 
 function goBack() {
     window.location.href = "dashboard.html";
@@ -32,3 +50,9 @@ function renderMeetings(type) {
         list.appendChild(div);
     });
 }
+
+// Load meetings on page load
+document.addEventListener("DOMContentLoaded", async () => {
+    await loadMeetings();
+    // renderMeetings is called in the page's inline script
+});

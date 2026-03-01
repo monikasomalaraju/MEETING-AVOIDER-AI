@@ -1,3 +1,4 @@
+const API_URL = "http://localhost:8000";
 const calendar = document.getElementById("calendar");
 const monthYear = document.getElementById("monthYear");
 const prevBtn = document.getElementById("prevMonth");
@@ -8,7 +9,35 @@ const upcomingList = document.getElementById("upcoming");
 const pastList = document.getElementById("past");
 
 let currentDate = new Date();
-let meetings = JSON.parse(localStorage.getItem("meetings")) || [];
+let meetings = [];
+let currentUser = null;
+
+// Initialize app
+async function initApp() {
+    const userStr = localStorage.getItem("currentUser");
+    if (!userStr) {
+        window.location.href = "login.html";
+        return;
+    }
+    
+    currentUser = JSON.parse(userStr);
+    await loadMeetings();
+    renderCalendar();
+    updateMeetings();
+}
+
+// Load meetings from API
+async function loadMeetings() {
+    try {
+        const response = await fetch(`${API_URL}/meetings/${currentUser.id}`);
+        if (response.ok) {
+            meetings = await response.json();
+        }
+    } catch (error) {
+        console.error("Error loading meetings:", error);
+        meetings = [];
+    }
+}
 
 // ask permission once
 if ("Notification" in window && Notification.permission !== "granted") {
@@ -104,10 +133,7 @@ nextBtn.onclick = () => {
     renderCalendar();
 };
 
-renderCalendar();
-updateMeetings();
-
-// highlight current nav link
+// calls moved to DOMContentLoaded after initApp
 function startMeetingReminders() {
     const today = new Date().toISOString().split("T")[0];
 
@@ -170,38 +196,32 @@ function checkMeetingStart() {
 // 🔁 check every 30 seconds
 setInterval(checkMeetingStart, 30000);
 
-document.addEventListener("DOMContentLoaded", () => {
+// Load user profile and nav
+document.addEventListener("DOMContentLoaded", async () => {
+    // Load user name and profile image
+    if (currentUser) {
+        document.getElementById("profileName").innerText = currentUser.name || "User";
+    }
+
+    const savedImage = localStorage.getItem("profileImage");
+    const topProfile = document.querySelector(".top-profile");
+    if (savedImage && topProfile) {
+        topProfile.src = savedImage;
+    }
+
+    // Highlight current nav link
     const navItems = document.querySelectorAll(".nav-item");
     const currentPage = window.location.pathname.split("/").pop();
-
     navItems.forEach(item => {
         const linkPage = item.getAttribute("href");
-
         if (linkPage === currentPage) {
             item.classList.add("active");
         }
     });
+
+    // Initialize app
+    await initApp();
 });
-
-
-
-function toggleSidebar() {
-    document.getElementById("profileSidebar").classList.toggle("active");
-}
-
-
-// Load user name
-document.addEventListener("DOMContentLoaded", () => {
-    const name = localStorage.getItem("username") || "User";
-    document.getElementById("profileName").innerText = name;
-});
-
-const topProfile = document.querySelector(".top-profile");
-const savedImage = localStorage.getItem("profileImage");
-
-if (savedImage && topProfile) {
-    topProfile.src = savedImage;
-}
 
 function checkMeetingReminder() {
     const now = new Date();
@@ -246,7 +266,8 @@ function closeProfilePopup() {
 }
 
 function logout() {
-    alert("Logged out!");
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("profileImage");
     window.location.href = "login.html";
 }
 
