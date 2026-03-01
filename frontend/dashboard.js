@@ -10,14 +10,11 @@ const pastList = document.getElementById("past");
 let currentDate = new Date();
 let meetings = JSON.parse(localStorage.getItem("meetings")) || [];
 
-if ("Notification" in window) {
-    if (Notification.permission !== "granted") {
-        Notification.requestPermission();
-    }
+// ask permission once
+if ("Notification" in window && Notification.permission !== "granted") {
+    Notification.requestPermission();
 }
 
-
-/* Render Calendar */
 function renderCalendar() {
     calendar.innerHTML = "";
 
@@ -45,12 +42,8 @@ function renderCalendar() {
 
         const today = new Date().toISOString().split("T")[0];
         if (dateStr === today) div.classList.add("today");
+        if (meetings.some(m => m.date === dateStr)) div.classList.add("has-meeting");
 
-        if (meetings.some(m => m.date === dateStr)) {
-            div.classList.add("has-meeting");
-        }
-
-        // ✅ THIS WAS MISSING
         div.addEventListener("click", () => {
             window.location.href = `add-meeting.html?date=${dateStr}`;
         });
@@ -60,14 +53,12 @@ function renderCalendar() {
 }
 
 
-/* Update Meetings */
 function updateMeetings() {
     todayList.innerHTML = "";
     upcomingList.innerHTML = "";
     pastList.innerHTML = "";
 
     const today = new Date().toISOString().split("T")[0];
-
     let todayCount = 0;
 
     meetings.forEach(m => {
@@ -83,25 +74,19 @@ function updateMeetings() {
         if (m.date === today) {
             todayList.appendChild(div);
             todayCount++;
-        }
-        else if (m.date > today) {
+        } else if (m.date > today) {
             upcomingList.appendChild(div);
-        }
-        else {
+        } else {
             pastList.appendChild(div);
         }
     });
 
-    // 🔔 TODAY NOTIFICATION
     const badge = document.getElementById("todayBadge");
     const notify = document.getElementById("todayNotification");
 
     if (todayCount > 0) {
         badge.style.display = "inline-block";
         notify.style.display = "block";
-
-        // Optional alert (shows once per refresh)
-        // alert("You have meetings today!");
     } else {
         badge.style.display = "none";
         notify.style.display = "none";
@@ -122,30 +107,7 @@ nextBtn.onclick = () => {
 renderCalendar();
 updateMeetings();
 
-function showSection(sectionId) {
-    const sections = ["present", "past", "future", "summary"];
-    const navItems = document.querySelectorAll(".nav-item");
-
-    sections.forEach(id => {
-        document.getElementById(id).style.display =
-            id === sectionId ? "block" : "none";
-    });
-
-    navItems.forEach(item => item.classList.remove("active"));
-    event.currentTarget.classList.add("active");
-}
-function goToPage(page) {
-    window.location.href = page;
-}
-
-if (todayCount > 0 && Notification.permission === "granted") {
-    new Notification("Bye Meet", {
-        body: "You have meetings scheduled today!",
-    });
-}
-if (Notification.permission !== "granted") {
-    Notification.requestPermission();
-}
+// highlight current nav link
 function startMeetingReminders() {
     const today = new Date().toISOString().split("T")[0];
 
@@ -221,55 +183,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-function openSidebar() {
-    document.getElementById("profileSidebar").classList.add("active");
-    document.getElementById("sidebarOverlay").classList.add("active");
-}
 
-function closeSidebar() {
-    document.getElementById("profileSidebar").classList.remove("active");
-    document.getElementById("sidebarOverlay").classList.remove("active");
-}
-
-/* Optional navigation functions */
-function goToProfile() {
-    window.location.href = "profile.html";
-}
-
-function goToSettings() {
-    window.location.href = "settings.html";
-}
-
-function goToHelp() {
-    alert("Help section coming soon 😊");
-}
-
-function logout() {
-    localStorage.clear();   // clears meetings + login
-    alert("Logged out successfully 👋");
-    window.location.href = "../login.html";
-}
-
-function goToProfile() {
-    window.location.href = "view-profile.html";
-}
-
-function goToSettings() {
-    window.location.href = "settings.html";
-}
-
-function goToHelp() {
-    window.location.href = "help.html";
-}
 
 function toggleSidebar() {
     document.getElementById("profileSidebar").classList.toggle("active");
 }
 
-function logout() {
-    localStorage.clear();
-    window.location.href = "login.html";
-}
 
 // Load user name
 document.addEventListener("DOMContentLoaded", () => {

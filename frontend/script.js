@@ -58,3 +58,8 @@ function logout() {
     localStorage.removeItem("loggedInUser");
     window.location.href = "login.html";
 }
+
+// utility stub for forgot password page
+function resetPassword() {
+    alert("Password reset feature is not available yet.");
+}
