@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bye Meet | Meeting History</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/buttons.css">
+    <link rel="stylesheet" href="../assets/css/summary.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" href="/assets/images/logo.png">
+</head>
+<body>
+
+<button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="logo">Bye Meet AI</div>
+        <ul class="menu">
+            <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+            <li><a href="calendar.html"><i class="fa-solid fa-calendar"></i> Calendar</a></li>
+            <li><a href="future-meetings.html"><i class="fa-solid fa-users"></i> Meetings</a></li>
+            <li><a href="summary.html" class="active"><i class="fa-solid fa-wand-magic-sparkles"></i> Meeting History</a></li>
+            <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+            <li><a href="help.html"><i class="fa-solid fa-circle-question"></i> Help</a></li>
+            <li><a href="javascript:void(0);" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+
+        <div id="hs-toast" class="ms-toast" role="status" aria-live="polite"></div>
+
+        <div class="hs-header">
+            <div>
+                <h1>Meeting History</h1>
+                <p class="ms-hint">Review your completed meetings and AI-generated insights.</p>
+            </div>
+            <a href="meeting-summarization.html" class="btn btn-primary"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate AI Summary</a>
+        </div>
+
+        <div class="hs-filters">
+            <button type="button" class="hs-filter-btn active" data-filter="all">All</button>
+            <button type="button" class="hs-filter-btn" data-filter="summarized">With Summary</button>
+            <button type="button" class="hs-filter-btn" data-filter="recent">Recent (7 days)</button>
+        </div>
+
+        <div id="hsStatus" class="ms-hint" style="margin-bottom:14px;">Loading your meeting history...</div>
+
+        <div id="hsGrid" class="hs-grid"></div>
+
+        <div id="hsEmpty" class="hs-empty" style="display:none;">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <h3>No meeting history yet.</h3>
+            <p>Generate your first AI meeting summary and it will appear here.</p>
+            <a href="meeting-summarization.html" class="btn btn-primary"><i class="fa-solid fa-wand-magic-sparkles"></i> Create Your First Summary</a>
+        </div>
+
+    </main>
+</div>
+
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/summary.js"></script>
+<script src="../assets/js/browser-notifications.js"></script>
+<script>
+document.getElementById("sidebarToggleBtn").addEventListener("click", function () {
+    document.body.classList.toggle("sidebar-open");
+});
+</script>
+</body>
+</html>

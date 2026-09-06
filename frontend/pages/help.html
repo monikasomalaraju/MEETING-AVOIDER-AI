@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bye Meet | Help</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/meeting-summarization.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" href="/assets/images/logo.png">
+</head>
+<body>
+
+<button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="logo">Bye Meet AI</div>
+        <ul class="menu">
+            <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+            <li><a href="calendar.html"><i class="fa-solid fa-calendar"></i> Calendar</a></li>
+            <li><a href="future-meetings.html"><i class="fa-solid fa-users"></i> Meetings</a></li>
+            <li><a href="summary.html"><i class="fa-solid fa-wand-magic-sparkles"></i> Meeting History</a></li>
+            <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+            <li><a href="help.html" class="active"><i class="fa-solid fa-circle-question"></i> Help</a></li>
+            <li><a href="javascript:void(0);" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+
+        <section class="ms-card">
+            <h1 style="margin-bottom:6px;"><i class="fa-solid fa-circle-question"></i> Help & Support</h1>
+            <p class="ms-hint" style="margin-bottom:24px;">A quick guide to how Meeting Avoider AI actually works today.</p>
+
+            <div class="ms-block">
+                <h4><i class="fa-solid fa-calendar-plus"></i> Scheduling a meeting</h4>
+                <p>From the Dashboard or sidebar, open <strong>Meetings → Add Meeting</strong>, fill in title, date, time, link, and participants, then save. It'll appear under Upcoming, Today, or Past depending on its date.</p>
+            </div>
+
+            <div class="ms-block">
+                <h4><i class="fa-solid fa-users"></i> Finding your meetings</h4>
+                <p>The <strong>Meetings</strong> tab has three views — Upcoming, Today, and Past — switchable via the tabs at the top of that page. Each meeting card has Join, Edit, and Delete actions.</p>
+            </div>
+
+            <div class="ms-block">
+                <h4><i class="fa-solid fa-wand-magic-sparkles"></i> Generating an AI summary</h4>
+                <p>Open <strong>Meeting History → Generate AI Summary</strong>. Paste a transcript, upload a .txt file, or upload an audio recording, then click Summarize. You'll get an executive summary, key points, decisions, action items, deadlines, risks, and next steps — plus a chat box to ask questions about that specific meeting.</p>
+            </div>
+
+            <div class="ms-block">
+                <h4><i class="fa-solid fa-puzzle-piece"></i> Using the Chrome extension</h4>
+                <p>Load the extension from the <code>meeting-avoider-extension</code> folder (see the project README), log in with your account, then capture or paste a transcript and send it — it'll open the summarization page with everything pre-filled.</p>
+            </div>
+
+            <div class="ms-block">
+                <h4><i class="fa-solid fa-id-card"></i> Profile & account</h4>
+                <p>Your profile (personal info, password, meeting stats, notification preference) is on the <strong>Profile</strong> page. Your profile photo is stored in your browser only, so it won't follow you to a different device or browser.</p>
+            </div>
+
+            <div class="ms-block">
+                <h4><i class="fa-solid fa-envelope"></i> Support</h4>
+                <p>Contact: support@byemeet.com</p>
+                <p><a href="dashboard.html" style="color:#818CF8;">&larr; Back to dashboard</a></p>
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/browser-notifications.js"></script>
+<script>
+document.getElementById("sidebarToggleBtn").addEventListener("click", function () {
+    document.body.classList.toggle("sidebar-open");
+});
+</script>
+</body>
+</html>

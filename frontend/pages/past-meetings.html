@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Meetings</title>
+    <link rel="stylesheet" href="../assets/css/meetings.css">
+</head>
+<body data-meeting-type="past">
+    <div class="header">
+        <button onclick="goBack()">&larr; Back</button>
+        <h2>Past Meetings</h2>
+    </div>
+
+
+    <div class="meeting-tabs">
+        <a href="future-meetings.html" class="meeting-tab">Upcoming</a>
+        <a href="present-meetings.html" class="meeting-tab">Today</a>
+        <a href="past-meetings.html" class="meeting-tab active">Past</a>
+    </div>
+    <div class="container">
+        <div id="meetingList" class="meeting-grid"></div>
+    </div>
+
+    <div class="empty-state" style="display:none;">
+
+        <img src="../assets/images/logo.png" alt="No meetings illustration">
+
+        <h2>No Meetings Scheduled</h2>
+
+        <p>Create your first meeting.</p>
+
+    </div>
+
+    <script src="../assets/js/meetings.js"></script>
+    <script src="../assets/js/browser-notifications.js"></script>
+</body>
+</html>

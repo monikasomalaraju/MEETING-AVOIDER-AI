@@ -1,0 +1,121 @@
+/* Auth pages (login / signup / forgot password) — dark theme, matching the
+   rest of the app. Relies on dashboard.css being linked first for the
+   --primary/--card/--bg/--text/--muted variables and base Inter font/reset. */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    background: radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.12), transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1), transparent 40%),
+                var(--bg);
+}
+
+.container {
+    width: 100%;
+    max-width: 380px;
+    background: var(--card);
+    padding: 32px 28px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.back-home-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color .15s;
+}
+
+.back-home-link:hover {
+    color: var(--primary);
+}
+
+.illustration {
+    width: 110px;
+    max-width: 100%;
+    margin: 4px auto 16px;
+    display: block;
+    opacity: 0.9;
+}
+
+h1 {
+    color: var(--text);
+    margin-bottom: 4px;
+    font-size: 24px;
+}
+
+.tagline {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 26px;
+}
+
+.field-group {
+    text-align: left;
+    margin-bottom: 16px;
+}
+
+.field-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 6px;
+}
+
+input {
+    width: 100%;
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #0F172A;
+    color: var(--text);
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color .15s, box-shadow .15s;
+}
+
+input::placeholder {
+    color: #5B6B85;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+form button,
+.container > button {
+    margin-top: 6px;
+}
+
+.links {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.links a {
+    font-size: 13px;
+    color: #A5B4FC;
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.links.single {
+    justify-content: center;
+}

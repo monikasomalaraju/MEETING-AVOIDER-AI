@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meeting Avoider AI</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+    <header class="header">
+        <img src="icons/icon48.png" alt="logo">
+        <h1>Meeting Avoider AI</h1>
+    </header>
+
+    <div id="statusBanner" class="banner" style="display:none;"></div>
+
+    <!-- LOGIN VIEW -->
+    <section id="loginView">
+        <p class="hint">Log in with your Meeting Avoider AI account to send transcripts.</p>
+
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="you@example.com">
+
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="••••••••">
+
+        <button id="loginBtn" class="primary-btn">Log In</button>
+
+        <p class="hint small">
+            Don't have an account? Open the
+            <a href="http://127.0.0.1:8000/signup.html" target="_blank">web app</a>
+            to sign up first.
+        </p>
+    </section>
+
+    <!-- MAIN VIEW -->
+    <section id="mainView" style="display:none;">
+
+        <div class="user-row">
+            <span id="userEmailLabel"></span>
+            <button id="logoutBtn" class="link-btn">Log out</button>
+        </div>
+
+        <label>Meeting Title</label>
+        <input type="text" id="meetingTitle" placeholder="Weekly Standup">
+
+        <div class="capture-row">
+            <button id="captureBtn" class="secondary-btn">
+                🎯 Capture from this page
+            </button>
+        </div>
+        <p class="hint small" id="captureHint">
+            Works best on Google Meet / Zoom / Teams tabs with captions visible. If capture doesn't find anything, paste the transcript manually below.
+        </p>
+
+        <label>Transcript</label>
+        <textarea id="transcriptText" rows="8" placeholder="Paste or capture the meeting transcript here..."></textarea>
+
+        <label style="margin-top:10px;">Or upload an audio recording (optional)</label>
+        <input type="file" id="audioFile" accept=".mp3,.wav,.m4a,.ogg,.webm">
+        <p class="hint small">If you upload audio, it's transcribed automatically — you can leave the text box above empty. Max 25MB.</p>
+
+        <button id="sendBtn" class="primary-btn">🚀 Send to Meeting Avoider AI</button>
+
+        <button id="openAppBtn" class="link-btn full">Open web app →</button>
+
+    </section>
+
+    <script src="popup.js"></script>
+</body>
+</html>

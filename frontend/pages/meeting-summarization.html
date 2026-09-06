@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bye Meet | Meeting Summarization</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/meeting-summarization.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+    <link rel="icon" href="/assets/images/logo.png">
+</head>
+<body>
+
+<button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="logo">Bye Meet AI</div>
+        <ul class="menu">
+            <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+            <li><a href="calendar.html"><i class="fa-solid fa-calendar"></i> Calendar</a></li>
+            <li><a href="future-meetings.html"><i class="fa-solid fa-users"></i> Meetings</a></li>
+            <li><a href="summary.html" class="active"><i class="fa-solid fa-wand-magic-sparkles"></i> Meeting History</a></li>
+            <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+            <li><a href="help.html"><i class="fa-solid fa-circle-question"></i> Help</a></li>
+            <li><a href="javascript:void(0);" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <section class="welcome-banner ms-banner">
+                <div>
+                    <h1><i class="fa-solid fa-wand-magic-sparkles"></i> Meeting Summarization</h1>
+                    <p>Upload a transcript, an audio recording, or paste text — get a structured AI summary in seconds.</p>
+                </div>
+            </section>
+        </header>
+
+        <div id="ms-toast" class="ms-toast" role="status" aria-live="polite"></div>
+
+        <div class="ms-grid">
+
+            <!-- LEFT PANEL: input -->
+            <section class="ms-panel ms-card">
+                <h2><i class="fa-solid fa-file-lines"></i> Meeting Details</h2>
+
+                <div class="input-group">
+                    <label for="msTitle">Meeting Title <span class="req">*</span></label>
+                    <input type="text" id="msTitle" placeholder="Sprint Planning – Week 12">
+                    <span class="ms-error" id="err-title"></span>
+                </div>
+
+                <div class="ms-row">
+                    <div class="input-group">
+                        <label for="msDate">Meeting Date</label>
+                        <input type="date" id="msDate">
+                    </div>
+                    <div class="input-group">
+                        <label for="msDuration">Duration</label>
+                        <input type="text" id="msDuration" placeholder="e.g. 45 min">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="msParticipants">Participants</label>
+                    <input type="text" id="msParticipants" placeholder="Alice, Bob, Carla">
+                </div>
+
+                <div class="ms-tabs">
+                    <button type="button" class="ms-tab active" data-tab="text">
+                        <i class="fa-solid fa-keyboard"></i> Paste / Upload Transcript
+                    </button>
+                    <button type="button" class="ms-tab" data-tab="audio">
+                        <i class="fa-solid fa-microphone"></i> Upload Audio
+                    </button>
+                </div>
+
+                <div class="ms-tab-panel" id="tab-text">
+                    <div class="input-group">
+                        <label for="msTranscriptFile">Upload transcript file (.txt)</label>
+                        <input type="file" id="msTranscriptFile" accept=".txt">
+                    </div>
+                    <div class="input-group">
+                        <label for="msTranscriptText">Or paste transcript text</label>
+                        <textarea id="msTranscriptText" rows="10" placeholder="Paste the full meeting transcript here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="ms-tab-panel" id="tab-audio" style="display:none;">
+                    <div class="input-group">
+                        <label for="msAudioFile">Upload audio recording (.mp3, .wav, .m4a, .ogg, .webm — max 25MB)</label>
+                        <input type="file" id="msAudioFile" accept=".mp3,.wav,.m4a,.ogg,.webm">
+                        <span class="ms-hint">The audio will be transcribed automatically before summarizing.</span>
+                    </div>
+                </div>
+
+                <span class="ms-error" id="err-source"></span>
+
+                <div class="ms-actions">
+                    <button class="save-btn" id="msSummarizeBtn"><i class="fa-solid fa-bolt"></i> Summarize</button>
+                    <button class="ms-clear-btn" id="msClearBtn"><i class="fa-solid fa-eraser"></i> Clear</button>
+                </div>
+            </section>
+
+            <!-- RIGHT PANEL: output -->
+            <section class="ms-panel ms-card ms-results" id="msResults">
+
+                <div class="ms-empty" id="msEmptyState">
+                    <i class="fa-solid fa-file-circle-question"></i>
+                    <p>Your generated summary will appear here.</p>
+                </div>
+
+                <div class="ms-loading" id="msLoading" style="display:none;">
+                    <ul class="ms-progress-steps" id="msProgressSteps">
+                        <li data-step="0"><i class="fa-solid fa-circle-notch"></i> Uploading transcript</li>
+                        <li data-step="1"><i class="fa-solid fa-circle-notch"></i> Understanding conversation</li>
+                        <li data-step="2"><i class="fa-solid fa-circle-notch"></i> Extracting key topics</li>
+                        <li data-step="3"><i class="fa-solid fa-circle-notch"></i> Finding decisions</li>
+                        <li data-step="4"><i class="fa-solid fa-circle-notch"></i> Extracting action items</li>
+                        <li data-step="5"><i class="fa-solid fa-circle-notch"></i> Generating summary</li>
+                        <li data-step="6"><i class="fa-solid fa-circle-notch"></i> Preparing final report</li>
+                        <li data-step="7"><i class="fa-solid fa-circle-notch"></i> Completed</li>
+                    </ul>
+
+                    <div class="ms-skeleton-grid">
+                        <div class="ms-skeleton-block ms-skeleton-wide"></div>
+                        <div class="ms-skeleton-block ms-skeleton-wide short"></div>
+                        <div class="ms-skeleton-block"></div>
+                        <div class="ms-skeleton-block"></div>
+                        <div class="ms-skeleton-block"></div>
+                        <div class="ms-skeleton-block"></div>
+                    </div>
+                </div>
+
+                <div id="msResultContent" style="display:none;">
+
+                    <div class="ms-result-header">
+                        <div>
+                            <h3 id="msResultTitle"></h3>
+                            <p id="msResultMeta" class="ms-hint"></p>
+                            <span class="ms-category-badge" id="msCategoryBadge" style="display:none;"></span>
+                        </div>
+                        <div class="ms-result-buttons">
+                            <button id="msCopyBtn" title="Copy summary"><i class="fa-solid fa-copy"></i> Copy</button>
+                            <button id="msPrintBtn" title="Print"><i class="fa-solid fa-print"></i> Print</button>
+                            <button id="msDownloadBtn" title="Download as PDF"><i class="fa-solid fa-download"></i> Download</button>
+                        </div>
+                    </div>
+
+                    <div class="ms-outcome-banner" id="msOutcomeBanner" style="display:none;">
+                        <i class="fa-solid fa-flag-checkered"></i>
+                        <span id="msOutcome"></span>
+                    </div>
+
+                    <div class="ms-block ms-highlight-block">
+                        <h4><i class="fa-solid fa-bullseye"></i> Executive Summary</h4>
+                        <p id="msExecutiveSummary"></p>
+                    </div>
+
+                    <div class="ms-block">
+                        <h4><i class="fa-solid fa-align-left"></i> Detailed Summary</h4>
+                        <p id="msOverallSummary"></p>
+                    </div>
+
+                    <div class="ms-cards-grid">
+
+                        <div class="ms-mini-card" id="msParticipantsCard">
+                            <h4><i class="fa-solid fa-users"></i> Participants</h4>
+                            <div id="msParticipantsChips" class="ms-chips"></div>
+                        </div>
+
+                        <div class="ms-mini-card">
+                            <h4><i class="fa-solid fa-list-check"></i> Key Points</h4>
+                            <ul id="msKeyPoints"></ul>
+                        </div>
+
+                        <div class="ms-mini-card" id="msDecisionsCard">
+                            <h4><i class="fa-solid fa-gavel"></i> Decisions</h4>
+                            <ul id="msDecisions"></ul>
+                        </div>
+
+                        <div class="ms-mini-card" id="msActionItemsCard">
+                            <h4><i class="fa-solid fa-square-check"></i> Action Items & Assigned Tasks</h4>
+                            <ul id="msActionItems"></ul>
+                        </div>
+
+                        <div class="ms-mini-card" id="msDeadlinesCard">
+                            <h4><i class="fa-solid fa-hourglass-half"></i> Deadlines</h4>
+                            <ul id="msDeadlines"></ul>
+                        </div>
+
+                        <div class="ms-mini-card">
+                            <h4><i class="fa-solid fa-triangle-exclamation"></i> Risks & Blockers</h4>
+                            <ul id="msRisks"></ul>
+                        </div>
+
+                        <div class="ms-mini-card">
+                            <h4><i class="fa-solid fa-shoe-prints"></i> Suggested Next Steps</h4>
+                            <ul id="msNextSteps"></ul>
+                        </div>
+
+                    </div>
+
+                    <div class="ms-block" id="msKeywordsCard">
+                        <h4><i class="fa-solid fa-tags"></i> Keywords</h4>
+                        <div id="msKeywords" class="ms-chips"></div>
+                    </div>
+
+                    <div class="ms-block ms-chat-block">
+                        <h4><i class="fa-solid fa-comments"></i> Ask about this meeting</h4>
+                        <div id="msChatLog" class="ms-chat-log"></div>
+                        <div class="ms-chat-input-row">
+                            <input type="text" id="msChatInput" placeholder="e.g. Who was assigned the frontend?">
+                            <button id="msChatSendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+                        </div>
+                        <span class="ms-hint">Answers are grounded only in this meeting's transcript and summary.</span>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+
+        <section class="ms-panel ms-card" id="msTranscriptPanel" style="display:none;">
+            <div class="ms-card-title-row">
+                <h2><i class="fa-solid fa-highlighter"></i> Transcript with Smart Highlights</h2>
+                <div class="ms-legend">
+                    <span class="ms-legend-item"><i class="ms-dot hl-deadline"></i> Deadlines</span>
+                    <span class="ms-legend-item"><i class="ms-dot hl-decision"></i> Decisions</span>
+                    <span class="ms-legend-item"><i class="ms-dot hl-action"></i> Action items</span>
+                    <span class="ms-legend-item"><i class="ms-dot hl-person"></i> People</span>
+                    <span class="ms-legend-item"><i class="ms-dot hl-keyword"></i> Keywords</span>
+                </div>
+            </div>
+            <p class="ms-hint">Click a highlighted phrase to jump to where it appears in the report above.</p>
+            <div id="msHighlightedTranscript" class="ms-transcript-box"></div>
+        </section>
+
+    </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="../assets/js/meeting-summarization.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/browser-notifications.js"></script>
+<script>
+document.getElementById("sidebarToggleBtn").addEventListener("click", function () {
+    document.body.classList.toggle("sidebar-open");
+});
+</script>
+</body>
+</html>

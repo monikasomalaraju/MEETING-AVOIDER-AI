@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bye Meet | Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/meeting-summarization.css">
+    <link rel="stylesheet" href="../assets/css/dashboard-intel.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+    <link rel="icon" href="/assets/images/logo.png">
+</head>
+<body>
+
+<button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="logo">Bye Meet AI</div>
+        <ul class="menu">
+            <li><a href="dashboard.html" class="active"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+            <li><a href="calendar.html"><i class="fa-solid fa-calendar"></i> Calendar</a></li>
+            <li><a href="future-meetings.html"><i class="fa-solid fa-users"></i> Meetings</a></li>
+            <li><a href="summary.html"><i class="fa-solid fa-wand-magic-sparkles"></i> Meeting History</a></li>
+            <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+            <li><a href="help.html"><i class="fa-solid fa-circle-question"></i> Help</a></li>
+            <li><a href="javascript:void(0);" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+
+        <div id="di-toast" class="ms-toast" role="status" aria-live="polite"></div>
+
+        <!-- WELCOME -->
+        <section class="di-welcome">
+            <div>
+                <h1 id="diGreeting">Welcome back 👋</h1>
+                <p id="diDateLine" class="ms-hint"></p>
+                <p id="diStatusLine" class="di-status-line"></p>
+            </div>
+            <div class="di-quick-actions">
+                <a href="add-meeting.html" class="di-quick-btn"><i class="fa-solid fa-calendar-plus"></i> Schedule Meeting</a>
+                <a href="meeting-summarization.html" class="di-quick-btn di-quick-primary"><i class="fa-solid fa-wand-magic-sparkles"></i> Summarize a Meeting</a>
+            </div>
+        </section>
+
+        <!-- KPI CARDS -->
+        <section class="di-kpi-grid" id="diKpiGrid">
+            <div class="di-kpi-card"><i class="fa-solid fa-calendar-days"></i><div><span id="kpiTotal" class="di-skeleton-num"></span><p>Total Meetings</p></div></div>
+            <div class="di-kpi-card"><i class="fa-solid fa-hourglass-half"></i><div><span id="kpiUpcoming" class="di-skeleton-num"></span><p>Upcoming</p></div></div>
+            <div class="di-kpi-card"><i class="fa-solid fa-check-double"></i><div><span id="kpiCompleted" class="di-skeleton-num"></span><p>Completed</p></div></div>
+            <div class="di-kpi-card"><i class="fa-solid fa-wand-magic-sparkles"></i><div><span id="kpiSummaries" class="di-skeleton-num"></span><p>AI Summaries</p></div></div>
+            <div class="di-kpi-card"><i class="fa-solid fa-square-check"></i><div><span id="kpiActionItems" class="di-skeleton-num"></span><p>Action Items</p></div></div>
+            <div class="di-kpi-card"><i class="fa-solid fa-gavel"></i><div><span id="kpiDecisions" class="di-skeleton-num"></span><p>Decisions Extracted</p></div></div>
+        </section>
+
+        <div class="di-grid">
+
+            <!-- LEFT COLUMN -->
+            <div class="di-col">
+
+                <!-- TODAY'S MEETINGS -->
+                <section class="ms-card di-section">
+                    <div class="ms-card-title-row">
+                        <h2><i class="fa-solid fa-calendar-day"></i> Today's Meetings</h2>
+                    </div>
+                    <div id="diTodayMeetings" class="di-list"></div>
+                </section>
+
+                <!-- ACTION ITEMS -->
+                <section class="ms-card di-section">
+                    <div class="ms-card-title-row">
+                        <h2><i class="fa-solid fa-square-check"></i> Action Items to Review</h2>
+                    </div>
+                    <p class="ms-hint">From your most recent AI summaries. There's no completion-tracking system yet, so these are shown as identified, not marked done/pending.</p>
+                    <div id="diActionItems" class="di-list"></div>
+                </section>
+
+                <!-- ACTIVITY TIMELINE -->
+                <section class="ms-card di-section">
+                    <div class="ms-card-title-row">
+                        <h2><i class="fa-solid fa-timeline"></i> Recent Activity</h2>
+                    </div>
+                    <div id="diTimeline" class="di-timeline"></div>
+                </section>
+
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="di-col">
+
+                <!-- AI INSIGHTS -->
+                <section class="ms-card di-section">
+                    <div class="ms-card-title-row">
+                        <h2><i class="fa-solid fa-brain"></i> AI Insights</h2>
+                    </div>
+                    <div id="diInsights" class="di-insights-grid"></div>
+                </section>
+
+                <!-- AI SEARCH ENTRY POINT -->
+                <section class="ms-card di-section">
+                    <div class="ms-card-title-row">
+                        <h2><i class="fa-solid fa-comments"></i> Ask Your Meetings</h2>
+                    </div>
+                    <p class="ms-hint">
+                        Per-meeting AI chat is available on any summarized meeting.
+                        A single search box across <em>all</em> meetings isn't built yet —
+                        open a specific meeting below to ask about it directly.
+                    </p>
+                    <a href="summary.html" class="di-quick-btn di-quick-primary" style="width:100%; justify-content:center; margin-top:8px;">
+                        <i class="fa-solid fa-magnifying-glass"></i> Browse Meetings to Ask About
+                    </a>
+                </section>
+
+                <!-- RECENT SUMMARIES -->
+                <section class="ms-card di-section">
+                    <div class="ms-card-title-row">
+                        <h2><i class="fa-solid fa-file-lines"></i> Recent AI Summaries</h2>
+                        <a href="summary.html" class="pf-link-btn">View All</a>
+                    </div>
+                    <div id="diRecentSummaries" class="di-list"></div>
+                </section>
+
+            </div>
+
+        </div>
+
+    </main>
+</div>
+
+<script src="../assets/js/dashboard-modern.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/browser-notifications.js"></script>
+<script>
+document.getElementById("sidebarToggleBtn").addEventListener("click", function () {
+    document.body.classList.toggle("sidebar-open");
+});
+</script>
+</body>
+</html>

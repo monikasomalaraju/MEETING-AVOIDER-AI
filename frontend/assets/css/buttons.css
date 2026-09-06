@@ -1,0 +1,101 @@
+/* Shared button system.
+   Assumes dashboard.css (or equivalent) is linked first for --primary/--card/
+   --text/--muted. Use .btn as the base class, plus one modifier:
+   .btn-primary / .btn-secondary / .btn-outline / .btn-success / .btn-danger
+   Optional: .btn-block (full width), .btn-lg (larger padding). */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 1;
+    transition: transform .15s ease, filter .15s ease, border-color .15s ease, background .15s ease;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-primary {
+    background: var(--primary, #6366F1);
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.25);
+}
+
+.btn-primary:hover {
+    filter: brightness(1.08);
+}
+
+.btn-secondary {
+    background: var(--card, #1E293B);
+    color: var(--text, #F8FAFC);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover {
+    border-color: var(--primary, #6366F1);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--primary, #6366F1);
+    border: 1px solid var(--primary, #6366F1);
+}
+
+.btn-outline:hover {
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.btn-success {
+    background: #10B981;
+    color: #ffffff;
+}
+
+.btn-success:hover {
+    filter: brightness(1.08);
+}
+
+.btn-danger {
+    background: rgba(239, 68, 68, 0.15);
+    color: #FCA5A5;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.btn-danger:hover {
+    background: rgba(239, 68, 68, 0.25);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-lg {
+    padding: 14px 28px;
+    font-size: 15px;
+}
+
+.btn-sm {
+    padding: 8px 14px;
+    font-size: 12px;
+    border-radius: 10px;
+}

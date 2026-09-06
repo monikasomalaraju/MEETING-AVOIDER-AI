@@ -1,0 +1,284 @@
+/* Dashboard — AI Meeting Intelligence Center
+   Built on dashboard.css (--primary/--card/--text/--muted) and reuses
+   meeting-summarization.css's .ms-card/.ms-hint/.ms-chip/.ms-toast/
+   .ms-card-title-row so the whole app shares one visual language. */
+
+.di-welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    background: var(--card);
+    border-radius: 20px;
+    padding: 26px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .2);
+}
+
+.di-welcome h1 {
+    margin: 0 0 6px;
+    font-size: 24px;
+}
+
+.di-status-line {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #A5B4FC;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.di-quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.di-quick-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #0F172A;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text);
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: border-color .15s, transform .15s;
+    white-space: nowrap;
+}
+
+.di-quick-btn:hover {
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.di-quick-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+/* KPI CARDS */
+.di-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 1100px) {
+    .di-kpi-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 640px) {
+    .di-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.di-kpi-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .15);
+}
+
+.di-kpi-card i {
+    font-size: 20px;
+    color: var(--primary);
+    width: 30px;
+    text-align: center;
+}
+
+.di-kpi-card span {
+    font-size: 20px;
+    font-weight: 700;
+    display: block;
+}
+
+.di-kpi-card p {
+    margin: 2px 0 0;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.di-kpi-card span.di-skeleton-num {
+    display: inline-block;
+    width: 28px;
+    height: 18px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #1E293B 25%, #263349 37%, #1E293B 63%);
+    background-size: 400% 100%;
+    animation: di-shimmer 1.4s ease infinite;
+}
+
+@keyframes di-shimmer {
+    0% { background-position: 100% 50%; }
+    100% { background-position: 0 50%; }
+}
+
+/* TWO-COLUMN GRID */
+.di-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+@media (max-width: 1000px) {
+    .di-grid { grid-template-columns: 1fr; }
+}
+
+.di-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.di-section {
+    margin-bottom: 0;
+}
+
+/* GENERIC LIST ITEMS (today's meetings / action items / recent summaries) */
+.di-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.di-list:empty::before,
+.di-empty {
+    content: "";
+}
+
+.di-empty-msg {
+    color: var(--muted);
+    font-size: 13px;
+    font-style: italic;
+    padding: 10px 0;
+}
+
+.di-item {
+    background: #0F172A;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: border-color .15s;
+}
+
+.di-item:hover {
+    border-color: var(--primary);
+}
+
+.di-item-main h4 {
+    margin: 0 0 4px;
+    font-size: 14px;
+}
+
+.di-item-main p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.di-item-badge {
+    background: rgba(52, 211, 153, 0.15);
+    color: #6EE7B7;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.di-item-arrow {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ACTIVITY TIMELINE */
+.di-timeline {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.di-timeline-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.di-timeline-item:last-child {
+    border-bottom: none;
+}
+
+.di-timeline-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(99, 102, 241, 0.15);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.di-timeline-content p {
+    margin: 0;
+    font-size: 13px;
+}
+
+.di-timeline-content span {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+/* AI INSIGHTS */
+.di-insights-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+@media (max-width: 500px) {
+    .di-insights-grid { grid-template-columns: 1fr; }
+}
+
+.di-insight-card {
+    background: #0F172A;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.di-insight-card i {
+    color: var(--primary);
+    margin-bottom: 6px;
+    display: block;
+}
+
+.di-insight-card strong {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.di-insight-card span {
+    font-size: 11px;
+    color: var(--muted);
+}

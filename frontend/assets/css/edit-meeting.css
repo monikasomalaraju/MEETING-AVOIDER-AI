@@ -1,0 +1,44 @@
+body{
+    background:#0F172A;
+    color:white;
+    font-family:Inter,sans-serif;
+    padding:40px;
+}
+
+.form-card{
+    max-width:700px;
+    margin:auto;
+    background:#1E293B;
+    padding:30px;
+    border-radius:20px;
+}
+
+.form-card h1{
+    margin-bottom:25px;
+}
+
+.form-card input{
+    width:100%;
+    margin-bottom:15px;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#0F172A;
+    color:white;
+}
+
+.form-card button{
+    width:100%;
+    padding:14px;
+    background:#6366F1;
+    border:none;
+    border-radius:10px;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.form-card button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}

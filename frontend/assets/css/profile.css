@@ -1,0 +1,262 @@
+/* Profile page — built on top of dashboard.css's theme variables
+   (--primary, --card, --text, --muted) so it matches the rest of the app,
+   fixing the old profile.css which was light-themed and inconsistent. */
+
+.pf-toast {
+    display: none;
+}
+.pf-toast.show {
+    display: block;
+}
+
+.pf-card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 26px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .2);
+    margin-bottom: 20px;
+}
+
+.pf-card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.pf-card-title h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    margin: 0;
+}
+
+.pf-link-btn {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.pf-link-btn:hover {
+    border-color: var(--primary);
+}
+
+/* HEADER */
+.pf-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.pf-avatar-wrap {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    flex-shrink: 0;
+}
+
+.pf-avatar-wrap img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary);
+}
+
+.pf-avatar-edit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--primary);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    border: 2px solid var(--card);
+}
+
+.pf-avatar-edit input {
+    display: none;
+}
+
+.pf-header-info h1 {
+    margin: 0 0 4px;
+    font-size: 22px;
+}
+
+.pf-meta-row {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.pf-meta-row i {
+    margin-right: 5px;
+}
+
+/* STATS */
+.pf-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+    .pf-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.pf-stat-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .15);
+}
+
+.pf-stat-card i {
+    font-size: 22px;
+    color: var(--primary);
+    width: 36px;
+    text-align: center;
+}
+
+.pf-stat-card span {
+    font-size: 20px;
+    font-weight: 700;
+    display: block;
+}
+
+.pf-stat-card p {
+    margin: 2px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* GRID OF CARDS BELOW STATS */
+.pf-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 900px) {
+    .pf-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pf-form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+.pf-form-actions .save-btn {
+    flex: 0 0 auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* TOGGLE SWITCH */
+.pf-toggle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.pf-toggle-row strong {
+    font-size: 14px;
+}
+
+.pf-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.pf-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.pf-slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: #334155;
+    border-radius: 999px;
+    transition: .2s;
+}
+
+.pf-slider::before {
+    content: "";
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: .2s;
+}
+
+.pf-switch input:checked + .pf-slider {
+    background: var(--primary);
+}
+
+.pf-switch input:checked + .pf-slider::before {
+    transform: translateX(20px);
+}
+
+/* DANGER ZONE */
+.pf-danger-zone {
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    grid-column: 1 / -1;
+}
+
+.pf-danger-zone h2 {
+    color: #FCA5A5;
+}
+
+.pf-danger-btn {
+    margin-top: 10px;
+    background: rgba(239, 68, 68, 0.15);
+    color: #FCA5A5;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.pf-danger-btn:hover {
+    background: rgba(239, 68, 68, 0.25);
+}

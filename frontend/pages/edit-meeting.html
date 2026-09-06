@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Meeting</title>
+    <link rel="stylesheet" href="../assets/css/edit-meeting.css">
+</head>
+<body>
+
+<div class="form-card">
+
+    <h1>✏️ Edit Meeting</h1>
+
+    <label>Meeting Title</label>
+    <input type="text" id="title" placeholder="Meeting title">
+
+    <label>Meeting Date</label>
+    <input type="date" id="date">
+
+    <label>Meeting Time</label>
+    <input type="text" id="time" placeholder="10:00 AM">
+
+    <label>Meeting Link</label>
+    <input type="url" id="link" placeholder="https://meet.google.com/...">
+
+    <label>Participants</label>
+    <input type="text" id="participants" placeholder="john@gmail.com, sara@gmail.com">
+
+    <button id="updateMeetingBtn" onclick="updateMeeting()">Save Changes</button>
+
+    <a href="calendar.html" class="back-btn" style="display:block;text-align:center;margin-top:15px;color:#94A3B8;text-decoration:none;">
+        ← Back to Calendar
+    </a>
+
+</div>
+
+<script src="../assets/js/edit-meeting.js"></script>
+<script src="../assets/js/browser-notifications.js"></script>
+</body>
+</html>

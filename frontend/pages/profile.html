@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Bye Meet</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/buttons.css">
+    <link rel="stylesheet" href="../assets/css/meeting-summarization.css">
+    <link rel="stylesheet" href="../assets/css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" href="/assets/images/logo.png">
+</head>
+<body>
+
+<button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="logo">Bye Meet AI</div>
+        <ul class="menu">
+            <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+            <li><a href="calendar.html"><i class="fa-solid fa-calendar"></i> Calendar</a></li>
+            <li><a href="future-meetings.html"><i class="fa-solid fa-users"></i> Meetings</a></li>
+            <li><a href="summary.html"><i class="fa-solid fa-wand-magic-sparkles"></i> Meeting History</a></li>
+            <li><a href="profile.html" class="active"><i class="fa-solid fa-user"></i> Profile</a></li>
+            <li><a href="help.html"><i class="fa-solid fa-circle-question"></i> Help</a></li>
+            <li><a href="javascript:void(0);" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+
+        <a href="dashboard.html" style="display:inline-flex; align-items:center; gap:8px; color:#94A3B8; text-decoration:none; font-size:13px; margin-bottom:16px;"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+
+        <div id="pf-toast" class="ms-toast" role="status" aria-live="polite"></div>
+
+        <!-- HEADER -->
+        <section class="pf-card pf-header">
+            <div class="pf-avatar-wrap">
+                <img id="profileImage" src="../assets/images/logo.png" alt="Profile photo">
+                <label class="pf-avatar-edit" title="Change photo">
+                    <i class="fa-solid fa-camera"></i>
+                    <input type="file" accept="image/*" id="pfAvatarInput">
+                </label>
+            </div>
+            <div class="pf-header-info">
+                <h1 id="profileName">User</h1>
+                <p id="profileRoleLine" class="ms-hint"></p>
+                <p id="profileEmail" class="ms-hint">No email available</p>
+                <div class="pf-meta-row">
+                    <span><i class="fa-solid fa-calendar-check"></i> Joined <span id="profileJoined">—</span></span>
+                    <span><i class="fa-solid fa-clock-rotate-left"></i> Last login <span id="profileLastLogin">—</span></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS -->
+        <section class="pf-stats-grid">
+            <div class="pf-stat-card">
+                <i class="fa-solid fa-calendar-days"></i>
+                <div><span id="statTotalMeetings">0</span><p>Total Meetings</p></div>
+            </div>
+            <div class="pf-stat-card">
+                <i class="fa-solid fa-hourglass-half"></i>
+                <div><span id="statUpcoming">0</span><p>Upcoming</p></div>
+            </div>
+            <div class="pf-stat-card">
+                <i class="fa-solid fa-check-double"></i>
+                <div><span id="statPast">0</span><p>Completed</p></div>
+            </div>
+            <div class="pf-stat-card">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <div><span id="statSummaries">0</span><p>AI Summaries</p></div>
+            </div>
+            <div class="pf-stat-card">
+                <i class="fa-solid fa-square-check"></i>
+                <div><span id="statActionItems">0</span><p>Action Items Identified</p></div>
+            </div>
+        </section>
+
+        <div class="pf-grid">
+
+            <!-- PERSONAL INFO -->
+            <section class="pf-card">
+                <div class="pf-card-title">
+                    <h2><i class="fa-solid fa-id-card"></i> Personal Information</h2>
+                    <button id="pfEditBtn" class="pf-link-btn" type="button">Edit</button>
+                </div>
+
+                <form id="pfProfileForm">
+                    <div class="ms-row">
+                        <div class="input-group">
+                            <label for="pfName">Full Name</label>
+                            <input type="text" id="pfName" disabled>
+                        </div>
+                        <div class="input-group">
+                            <label for="pfEmail">Email</label>
+                            <input type="email" id="pfEmail" disabled>
+                        </div>
+                    </div>
+
+                    <div class="ms-row">
+                        <div class="input-group">
+                            <label for="pfPhone">Phone</label>
+                            <input type="text" id="pfPhone" disabled placeholder="Not set">
+                        </div>
+                        <div class="input-group">
+                            <label for="pfRole">Role</label>
+                            <input type="text" id="pfRole" disabled placeholder="e.g. Student, PM, Engineer">
+                        </div>
+                    </div>
+
+                    <div class="ms-row">
+                        <div class="input-group">
+                            <label for="pfOrganization">Organization</label>
+                            <input type="text" id="pfOrganization" disabled placeholder="Not set">
+                        </div>
+                        <div class="input-group">
+                            <label for="pfDepartment">Department</label>
+                            <input type="text" id="pfDepartment" disabled placeholder="Not set">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="pfBio">Bio</label>
+                        <textarea id="pfBio" rows="3" disabled placeholder="A short bio about you..."></textarea>
+                    </div>
+
+                    <div class="pf-form-actions" id="pfSaveRow" style="display:none;">
+                        <button type="submit" id="pfSaveProfileBtn" class="save-btn">Save Changes</button>
+                        <button type="button" id="pfCancelBtn" class="ms-clear-btn">Cancel</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- SECURITY -->
+            <section class="pf-card">
+                <div class="pf-card-title">
+                    <h2><i class="fa-solid fa-shield-halved"></i> Account Security</h2>
+                </div>
+
+                <form id="pfPasswordForm">
+                    <div class="input-group">
+                        <label for="pfCurrentPassword">Current Password</label>
+                        <input type="password" id="pfCurrentPassword" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="pfNewPassword">New Password</label>
+                        <input type="password" id="pfNewPassword" required minlength="6">
+                        <span class="ms-hint">At least 6 characters.</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="pfConfirmPassword">Confirm New Password</label>
+                        <input type="password" id="pfConfirmPassword" required minlength="6">
+                    </div>
+                    <button type="submit" id="pfChangePasswordBtn" class="btn btn-primary btn-block">Change Password</button>
+                </form>
+            </section>
+
+            <!-- PREFERENCES -->
+            <section class="pf-card">
+                <div class="pf-card-title">
+                    <h2><i class="fa-solid fa-sliders"></i> Preferences</h2>
+                </div>
+
+                <div class="pf-toggle-row">
+                    <div>
+                        <strong>Email Notifications</strong>
+                        <p class="ms-hint">Whether this account is opted in to receive email updates.</p>
+                    </div>
+                    <label class="pf-switch">
+                        <input type="checkbox" id="pfNotifyToggle">
+                        <span class="pf-slider"></span>
+                    </label>
+                </div>
+
+                <p class="ms-hint" style="margin-top:14px;">
+                    <i class="fa-solid fa-circle-info"></i>
+                    This app currently ships with one dark theme only — a Light mode toggle isn't wired up yet, so it isn't shown here rather than offering something that doesn't do anything.
+                </p>
+            </section>
+
+            <!-- DANGER ZONE -->
+            <section class="pf-card pf-danger-zone">
+                <div class="pf-card-title">
+                    <h2><i class="fa-solid fa-triangle-exclamation"></i> Danger Zone</h2>
+                </div>
+                <p class="ms-hint">Deleting your account permanently removes your meetings, transcripts, and AI summaries. This cannot be undone.</p>
+                <button id="pfDeleteAccountBtn" class="pf-danger-btn" type="button">Delete Account</button>
+            </section>
+
+        </div>
+
+    </main>
+</div>
+
+<script src="../assets/js/profile.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/browser-notifications.js"></script>
+<script>
+document.getElementById("sidebarToggleBtn").addEventListener("click", function () {
+    document.body.classList.toggle("sidebar-open");
+});
+</script>
+</body>
+</html>

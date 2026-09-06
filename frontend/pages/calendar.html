@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bye Meet Calendar</title>
+    <link rel="stylesheet" href="../assets/css/calendar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<div class="page-header">
+
+    <button class="back-btn" onclick="window.location.href='dashboard.html'">
+        <i class="fa-solid fa-arrow-left"></i>
+         Back
+    </button>
+
+    <h1>Calendar</h1>
+</div>
+<div class="calendar-layout">
+
+    <div class="calendar-card">
+
+        <div class="calendar-header">
+            <button onclick="openAddMeeting()">
+                + New Meeting
+            </button>
+
+            <button id="prevMonth">◀</button>
+
+            <h2 id="monthYear"></h2>
+
+            <button id="nextMonth">▶</button>
+
+            <button onclick="goToToday()" class="today-btn">
+                Today
+            </button>
+
+
+        </div>
+
+        <div class="weekdays">
+
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+
+        </div>
+
+        <div id="calendar" class="calendar-grid">
+
+        </div>
+
+    </div>
+
+    <div class="meeting-panel">
+
+        <h2>Meetings</h2>
+
+        <div id="selectedDayMeetings">
+
+            Click any date to view meetings
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="meetingModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close-modal"
+              onclick="closeModal()">
+              <i class="fa-solid fa-xmark"></i>
+        </span>
+
+        <h2 id="modalTitle">
+            Add Meeting
+        </h2>
+
+        <input
+            type="text"
+            id="meetingTitle"
+            placeholder="Meeting Title">
+
+        <input
+            type="date"
+            id="meetingDate"
+            class="modal-input">
+
+        <div class="time-row">
+
+           <select id="meetingHour">
+             <option>01</option>
+             <option>02</option>
+             <option>03</option>
+             <option>04</option>
+             <option>05</option>
+             <option>06</option>
+             <option>07</option>
+             <option>08</option>
+             <option>09</option>
+             <option>10</option>
+             <option>11</option>
+             <option>12</option>
+            </select>
+            
+            <select id="meetingMinute">
+                <option>00</option>
+                <option>15</option>
+                <option>30</option>
+                <option>45</option>
+            </select>
+            
+            <select id="meetingPeriod">
+                <option>AM</option>
+                <option>PM</option>
+            </select>
+        </div>
+
+        <input
+            type="text"
+            id="meetingLink"
+            placeholder="Meeting Link">
+
+        <button
+            id="saveMeetingBtn">
+            Save Meeting
+        </button>
+
+    </div>
+
+</div>
+
+<script src="../assets/js/calendar.js"></script>
+<script src="../assets/js/browser-notifications.js"></script>
+
+</body>
+</html>

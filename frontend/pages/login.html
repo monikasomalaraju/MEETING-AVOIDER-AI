@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bye Meet - Login</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/buttons.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" href="/assets/images/logo.png">
+</head>
+<body>
+
+<div class="container">
+
+    <a href="landing.html" class="back-home-link"><i class="fa-solid fa-arrow-left"></i> Back to home</a>
+
+    <img src="../assets/images/login.png" class="illustration" alt="Login illustration">
+
+    <h1>Bye Meet</h1>
+    <p class="tagline">Save time. Skip stress.</p>
+
+    <!-- LOGIN FORM -->
+    <form onsubmit="login(); return false;">
+        <div class="field-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="you@example.com" required>
+        </div>
+        <div class="field-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+
+        <!-- IMPORTANT: type="submit", no onclick -->
+        <button type="submit" id="loginBtn" class="btn btn-primary btn-block">Login</button>
+    </form>
+
+    <div class="links">
+        <a href="signup.html">Create Account</a>
+        <a href="forgot.html">Forgot Password?</a>
+    </div>
+
+</div>
+
+<script src="../assets/js/script.js"></script>
+</body>
+</html>

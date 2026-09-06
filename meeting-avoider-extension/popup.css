@@ -1,0 +1,175 @@
+:root {
+    --primary: #6366F1;
+    --bg: #0F172A;
+    --card: #1E293B;
+    --text: #F8FAFC;
+    --muted: #94A3B8;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 340px;
+    margin: 0;
+    padding: 16px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.header img {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+}
+
+.header h1 {
+    font-size: 15px;
+    margin: 0;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin: 10px 0 4px;
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--card);
+    color: var(--text);
+    font-size: 13px;
+    font-family: inherit;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    background: var(--card);
+    color: var(--muted);
+    font-size: 12px;
+    font-family: inherit;
+}
+
+input[type="file"]::file-selector-button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin-right: 10px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.primary-btn {
+    width: 100%;
+    margin-top: 14px;
+    padding: 11px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.primary-btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.secondary-btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    color: #818CF8;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 0;
+}
+
+.link-btn.full {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 12px;
+}
+
+.hint {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.hint.small {
+    font-size: 11px;
+}
+
+.hint a {
+    color: #818CF8;
+}
+
+.capture-row {
+    margin-top: 14px;
+}
+
+.user-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.banner {
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.banner.success {
+    background: rgba(34, 197, 94, 0.15);
+    color: #86EFAC;
+}
+
+.banner.error {
+    background: rgba(239, 68, 68, 0.15);
+    color: #FCA5A5;
+}
