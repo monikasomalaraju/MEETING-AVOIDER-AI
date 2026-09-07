@@ -30,7 +30,7 @@
       "run_at": "document_idle"
     }
   ],
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": ["storage", "activeTab", "scripting", "alarms", "notifications"],
   "host_permissions": [
     "http://127.0.0.1:8000/*",
     "http://localhost:8000/*"

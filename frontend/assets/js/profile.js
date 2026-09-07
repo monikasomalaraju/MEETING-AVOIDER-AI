@@ -254,4 +254,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("pfNotifyToggle").addEventListener("change", pfToggleNotify);
     document.getElementById("pfAvatarInput").addEventListener("change", pfUploadAvatar);
     document.getElementById("pfDeleteAccountBtn").addEventListener("click", pfDeleteAccount);
+
+    document.querySelectorAll(".pf-password-toggle").forEach((toggle) => {
+        toggle.addEventListener("click", () => {
+            const input = document.getElementById(toggle.dataset.passwordTarget);
+            const isVisible = input.type === "text";
+            input.type = isVisible ? "password" : "text";
+            toggle.setAttribute("aria-label", `${isVisible ? "Show" : "Hide"} password`);
+            toggle.innerHTML = `<i class="fa-solid fa-eye${isVisible ? "" : "-slash"}"></i>`;
+        });
+    });
 });

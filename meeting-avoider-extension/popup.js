@@ -77,6 +77,7 @@ async function handleLogin() {
         }
 
         await storeUser(body.user);
+        chrome.runtime.sendMessage({ type: "MA_SYNC_REMINDERS" });
         showBanner("Logged in successfully.", "success");
         await refreshView();
 
@@ -89,6 +90,7 @@ async function handleLogin() {
 
 async function handleLogout() {
     await clearUser();
+    chrome.runtime.sendMessage({ type: "MA_SYNC_REMINDERS" });
     await refreshView();
 }
 

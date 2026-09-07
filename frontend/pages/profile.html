@@ -31,7 +31,7 @@
 
     <main class="main-content">
 
-        <a href="dashboard.html" style="display:inline-flex; align-items:center; gap:8px; color:#94A3B8; text-decoration:none; font-size:13px; margin-bottom:16px;"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+        <a href="dashboard.html" class="pf-back-link"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
 
         <div id="pf-toast" class="ms-toast" role="status" aria-live="polite"></div>
 
@@ -45,6 +45,7 @@
                 </label>
             </div>
             <div class="pf-header-info">
+                <span class="pf-eyebrow">Account overview</span>
                 <h1 id="profileName">User</h1>
                 <p id="profileRoleLine" class="ms-hint"></p>
                 <p id="profileEmail" class="ms-hint">No email available</p>
@@ -143,16 +144,25 @@
                 <form id="pfPasswordForm">
                     <div class="input-group">
                         <label for="pfCurrentPassword">Current Password</label>
-                        <input type="password" id="pfCurrentPassword" required>
+                        <div class="pf-password-input">
+                            <input type="password" id="pfCurrentPassword" required>
+                            <button type="button" class="pf-password-toggle" data-password-target="pfCurrentPassword" aria-label="Show current password"><i class="fa-solid fa-eye"></i></button>
+                        </div>
                     </div>
                     <div class="input-group">
                         <label for="pfNewPassword">New Password</label>
-                        <input type="password" id="pfNewPassword" required minlength="6">
+                        <div class="pf-password-input">
+                            <input type="password" id="pfNewPassword" required minlength="6">
+                            <button type="button" class="pf-password-toggle" data-password-target="pfNewPassword" aria-label="Show new password"><i class="fa-solid fa-eye"></i></button>
+                        </div>
                         <span class="ms-hint">At least 6 characters.</span>
                     </div>
                     <div class="input-group">
                         <label for="pfConfirmPassword">Confirm New Password</label>
-                        <input type="password" id="pfConfirmPassword" required minlength="6">
+                        <div class="pf-password-input">
+                            <input type="password" id="pfConfirmPassword" required minlength="6">
+                            <button type="button" class="pf-password-toggle" data-password-target="pfConfirmPassword" aria-label="Show confirmed password"><i class="fa-solid fa-eye"></i></button>
+                        </div>
                     </div>
                     <button type="submit" id="pfChangePasswordBtn" class="btn btn-primary btn-block">Change Password</button>
                 </form>
