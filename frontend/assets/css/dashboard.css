@@ -115,6 +115,43 @@ body.sidebar-open .main-content {
     margin-left: 260px;
 }
 
+@media (min-width: 901px) {
+    .layout {
+        align-items: stretch;
+    }
+
+    .sidebar {
+        position: relative;
+        left: auto;
+        top: auto;
+        flex: 0 0 0;
+        width: 0;
+        height: 100vh;
+        padding: 0;
+        overflow: hidden;
+        transform: none;
+        transition: flex-basis 0.25s ease, width 0.25s ease, padding 0.25s ease;
+    }
+
+    body.sidebar-open .sidebar {
+        flex-basis: 260px;
+        width: 260px;
+        padding: 30px;
+    }
+
+    .main-content {
+        flex: 1 1 auto;
+        min-width: 0;
+        width: auto;
+        margin-left: 0;
+        transition: none;
+    }
+
+    body.sidebar-open .main-content {
+        margin-left: 0;
+    }
+}
+
 
 .topbar input{
 
